@@ -1,0 +1,48 @@
+version: '3.9'
+name: todo_calabria
+
+services:
+  postgresql:
+    ports:
+      # Port changed to 5433 to not conflict with assistant DB
+      - '5434:5434'
+    image: postgres:15.3-alpine
+    environment:
+      PGPORT: 5434
+      POSTGRES_PASSWORD: ${TODO_CALABRIA_DB_PASSWORD}
+      POSTGRES_USER: ${TODO_CALABRIA_DB_USERNAME}
+      POSTGRES_DB: ${TODO_CALABRIA_DB_NAME}
+    volumes:
+      - todo_calabria:/var/lib/postgresql/data
+    networks:
+      - todo_calabria
+
+  app:
+    depends_on:
+      - postgresql
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: todo_calabria:local
+    env_file:
+      - .env
+    environment:
+      NODE_CONFIG_ENV: local
+      NODE_PORT: '3003'
+      TODO_CALABRIA_DB_HOST: postgresql
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./.env:/usr/src/app/.env
+    networks:
+      - todo_calabria
+    ports:
+      - '3003:3003'
+    command: npm run watch
+
+volumes:
+  todo_calabria:
+
+networks:
+  todo_calabria:
+    name: todo_calabria
