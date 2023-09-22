@@ -10,7 +10,7 @@ import { getLogger, LoggerFormat, LoggerLevel } from "./feautures/logger/logger"
 import { WinstonLoggerService } from "./feautures/logger/LoggerService";
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { cors: true });
     const config = app.get(ConfigService)
 
     const loggerLevel = getValueFromConfig<LoggerLevel>(config, 'LOGGER_LEVEL')
@@ -42,14 +42,14 @@ async function bootstrap() {
 
     const port = getValueFromConfig<number>(config,'APP_PORT')
 
-    app.enableCors({
+    /*app.enableCors({
         allowedHeaders: '*',
         origin: [
             "*",
         ],
         methods: '*',
         exposedHeaders: '*',
-    });
+    });*/
 
     await app.listen(port).then(
         () => {
