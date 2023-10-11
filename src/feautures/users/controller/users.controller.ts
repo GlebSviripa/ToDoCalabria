@@ -1,12 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from "@nestjs/common";
-import {
-    ApiCreatedResponse,
-    ApiExtraModels,
-    ApiOkResponse,
-    ApiOperation,
-    ApiTags,
-    getSchemaPath
-} from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, HttpCode, Param, Put, Query } from "@nestjs/common";
+import { ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath } from "@nestjs/swagger";
 import { HttpStatus } from "@nestjs/common/enums/http-status.enum";
 import { UserInviteView, UserView, useUserViewer } from "./users.views";
 import { UserAuth } from "../../auth/auth.user.decorator";
@@ -16,7 +9,7 @@ import { EntityId } from "../../../common/common.types";
 import { Auth } from "../../auth/controller/auth.controller.types";
 import { UsersProfileGetUseCase } from "../domain/users.profile.get.usecase";
 import { UserCreateBody, UserSearchQuery, UserSendInviteBody, UserUpdateBody } from "./users.controller.types";
-import { userCreateInputSchema, userSearchSchema, userUpdateInputSchema } from "./users.controller.validation";
+import { userSearchSchema, userUpdateInputSchema } from "./users.controller.validation";
 import { UsersProfileUpdateUseCase } from "../domain/users.profile.update.usecase";
 import { errorNotFound } from "../../../common/common.errors";
 import { ConfigService } from "@nestjs/config";

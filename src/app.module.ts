@@ -7,6 +7,7 @@ import { HealthModule } from "./feautures/health/health.module";
 import { AuthModule } from "./feautures/auth/auth.module";
 import { UsersModule } from "./feautures/users/users.module";
 import { JwtAuthGuard } from "./feautures/auth/auth.jwt.guard";
+import { NotesModule } from "./feautures/notes/notes.module";
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import { JwtAuthGuard } from "./feautures/auth/auth.jwt.guard";
         HealthModule,
         AuthModule,
         UsersModule,
+        NotesModule,
     ],
     controllers: [],
     providers: [

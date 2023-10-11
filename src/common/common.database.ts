@@ -6,6 +6,7 @@ import { User } from "../database/entities/user";
 import { UserSession } from "../database/entities/user_session";
 import { UserCode } from "../database/entities/user_codes";
 import { UserRole } from "../database/entities/user_roles";
+import { Note } from "../database/entities/note";
 
 @Injectable()
 export class DBConfigService implements TypeOrmOptionsFactory {
@@ -21,7 +22,7 @@ export class DBConfigService implements TypeOrmOptionsFactory {
             password: getValueFromConfig<string>(this.configService, 'TODO_CALABRIA_DB_PASSWORD'),
             database: getValueFromConfig<string>(this.configService, 'TODO_CALABRIA_DB_NAME'),
             migrations: ['src/migrations/*.ts'],
-            entities: [User, UserSession, UserCode, UserRole, ],
+            entities: [User, UserSession, UserCode, UserRole, Note ],
             synchronize: false,
             logging: true,
             ssl:

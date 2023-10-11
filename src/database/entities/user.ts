@@ -4,6 +4,7 @@ import { UserSession } from "./user_session";
 import { UserCode } from "./user_codes";
 import { UserRole } from "./user_roles";
 import { UserStatus } from "../../feautures/users/domain/user.domain.types";
+import { Note } from "./note";
 
 @Entity('users')
 @Unique(["email"])
@@ -43,4 +44,7 @@ export class User extends BaseEntity {
 
     @OneToMany(() => UserRole, (userRole) => userRole.user)
     roles!: UserRole[]
+
+    @OneToMany(() => Note, (note) => note.user)
+    notes!: Note[]
 }
